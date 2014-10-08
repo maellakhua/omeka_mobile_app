@@ -37,13 +37,36 @@
     <h1> Testfsd2 </h1>
 </div>
 -->
-      <body ng-app="jsoncall" ng-controller="customersController">
-      <h1> Test </h1>
+      <body ng-app="jsoncall" ng-controller="collectionController">
+      <h1> Test collections</h1>
 <div > 
 
 <ul>
   <li ng-repeat="x in id">
-    {{ x.id }}
+    {{ x.element_texts[0].text +" "+ x.id }}
+
+    
+    <!--<a href="http://83.212.109.180/omeka/collections/show/2">{{ x.element_texts[0].text }}</a> -->
+  </li>
+</ul>
+
+</div>
+
+      
+
+</body>
+<!-- problem! vgazei pali ta collections GIATI? -->
+
+<body ng-app="jsoncall2" ng-controller="itemsController">
+      <h1> Test items </h1>
+<div > 
+
+<ul>
+  <li ng-repeat="y in id">
+    {{ y.element_texts[0].text +" whoot "+ y.id }}
+    
+    
+    <!--<a href="http://83.212.109.180/omeka/collections/show/2">{{ x.element_texts[0].text }}</a> -->
   </li>
 </ul>
 
@@ -53,5 +76,5 @@
 
 </body>
 
-</body>
+<!--</body>-->
 </html>
