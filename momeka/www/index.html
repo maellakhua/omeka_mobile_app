@@ -37,9 +37,9 @@
     <h1> Testfsd2 </h1>
 </div>
 -->
-      <body ng-app="jsoncall" ng-controller="collectionController">
+      <body ng-app="jsoncall">
       <h1> Test collections</h1>
-<div > 
+<div ng-controller="collectionController"> 
 
 <ul>
   <li ng-repeat="x in id">
@@ -51,15 +51,10 @@
 </ul>
 
 </div>
+      <h1> Test ITEMS</h1>
 
       
-
-</body>
-<!-- problem! vgazei pali ta collections GIATI? -->
-
-<body ng-app="jsoncall2" ng-controller="itemsController">
-      <h1> Test items </h1>
-<div > 
+      <div ng-controller="itemsController"> 
 
 <ul>
   <li ng-repeat="y in id">
@@ -71,10 +66,10 @@
 </ul>
 
 </div>
-
       
 
 </body>
+
 
 <!--</body>-->
 </html>
