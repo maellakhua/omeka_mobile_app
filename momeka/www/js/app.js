@@ -32,7 +32,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // setup an abstract state for the tabs directive
     .state('tab', {
-      url: "/tab",
+      url: "",
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
@@ -97,6 +97,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    
+    .state('tab.item-details', {
+      url: '/item/:itemId',
+      views: {
+        'tab-collections': {
+          templateUrl: 'templates/item-details.html',
+          controller: 'ItemDetailCtrl'
+        }
+      }
+    });
     
 
 

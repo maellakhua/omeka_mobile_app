@@ -65,8 +65,25 @@ angular.module('starter.controllers', [])
 })
 
 
-
-
+.controller('ItemDetailCtrl', function($scope,$stateParams,$http) {
+    
+    
+    $http({
+            url: "http://83.212.109.180/omeka/api/items/"+$stateParams.itemId,
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                
+                $scope.item = response;
+                  
+                
+            }).error(function(error){
+                $scope.error = error;
+            });
+});
 
 
 
