@@ -6,7 +6,6 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
-angular.module('jsoncall' , ['ionic','jsoncall.controllers'])
 
 
 .run(function($ionicPlatform) {
@@ -23,7 +22,6 @@ angular.module('jsoncall' , ['ionic','jsoncall.controllers'])
   });
 })
 
-/*
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -78,11 +76,31 @@ angular.module('jsoncall' , ['ionic','jsoncall.controllers'])
           controller: 'AccountCtrl'
         }
       }
-    });
+    })
+    
+    .state('tab.collections', {
+      url: '/collections',
+      views: {
+        'tab-collections': {
+          templateUrl: 'templates/collections.html',
+          controller: 'CollectionsCtrl'
+        }
+      }
+    })
+    
+    .state('tab.collection-details', {
+      url: '/collection/:collectionId',
+      views: {
+        'tab-collections': {
+          templateUrl: 'templates/collection-details.html',
+          controller: 'CollectionDetailCtrl'
+        }
+      }
+    })
+    
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
 });
-
-*/
