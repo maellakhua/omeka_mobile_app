@@ -1,0 +1,8 @@
+{
+    "attributes": {
+        "+{{x.id}}": {
+            "context": "a"
+        }
+    },
+    "elements": {}
+}

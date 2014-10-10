@@ -77,14 +77,59 @@ angular.module('starter.controllers', [])
             }
             }).success(function(response){
                 
-                $scope.item = response;
-                  
+                var jsonarray = [];
+                $scope.length=response.element_texts.length;
+                for (var i=0; i<response.element_texts.length; i++){
+                    var jsonObj=new Object;
+                    var x = response.element_texts[i].element.name;
+                    var y=response.element_texts[i].text;
+                     jsonObj[x]=y;
+                    jsonarray.push(jsonObj);
+                }
+                 
+                $scope.items = angular.fromJson(jsonarray);
+                $scope.item_title = response.element_texts[0].text;
+
+                $scope.pic_url=response.files.url;
+                
+                console.log($scope.pic_url);
+
+//$scope.pic_url
+$http({
+            url: $scope.pic_url,
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                
+                var jsonarraypic = [];
+                $scope.lengthpic=response.length;
+                for (var i=0; i<response.length; i++){
+                    var jsonObj2=new Object;
+                    var x = response[i].file_urls.square_thumbnail;
+                    var y=response[i].file_urls.original;
+                     jsonObj2[x]=y;
+                    jsonarraypic.push(jsonObj2);
+                }
+                 
+                $scope.pics = angular.fromJson(jsonarraypic);
+                
+                
+                
+                $scope.pic_thumbnail_url=response[0].file_urls.square_thumbnail;               
+                $scope.pic_original_url=response[0].file_urls.original;
+                
+            }).error(function(error){
+                $scope.error = error;
+            });
+               
+                
+                
                 
             }).error(function(error){
                 $scope.error = error;
             });
 });
-
-
-
 
