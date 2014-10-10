@@ -49,6 +49,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
+    .state('tab.search', {
+      url: '/search',
+      views: {
+        'tab-search': {
+          templateUrl: 'templates/search.html',
+          controller: 'SearchItemsCtrl'
+        }
+      }
+    })
+
+
     .state('tab.friends', {
       url: '/friends',
       views: {

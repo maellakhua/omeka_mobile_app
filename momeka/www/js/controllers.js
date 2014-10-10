@@ -41,6 +41,7 @@ angular.module('starter.controllers', [])
             }
             }).success(function(response){
                 
+                $scope.items_in_collection=response.items.count;
                 $scope.collection_name = response.element_texts[0].text;
                  $http({
                     url: response.items.url,
@@ -63,6 +64,46 @@ angular.module('starter.controllers', [])
                 $scope.error = error;
             });
 })
+
+.controller('SearchItemsCtrl', function($scope,$http) {
+    $scope.onchange = function(){
+          $http({
+            url: "http://83.212.109.180/omeka/api/items/",
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                
+                var jsonsearcharray = [];
+                $scope.length=response.length;
+                //var name=$scope.item_name;
+                var y=$scope.item_name;
+                                console.log(y);
+
+                for (var i=0; i<response.length; i++){
+                    var x=response[i].element_texts[0].text;
+                    //console.log(x);
+
+                    if(x==y){
+
+                    jsonsearcharray.push(response[i]);
+                        
+                    }
+                    
+                }
+                 
+                $scope.foundItems = angular.fromJson(jsonsearcharray);
+                
+                
+                //$scope.collections = response;
+            }).error(function(error){
+                $scope.error = error;
+            });
+    }
+})
+
 
 
 .controller('ItemDetailCtrl', function($scope,$stateParams,$http) {
