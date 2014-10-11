@@ -11,8 +11,8 @@
       <input type="text" placeholder="Item's name" ng-model="item_name" ng-change="onchange()">
       </br>      
       <ion-list>
-        <ion-item ng-repeat="item in foundItems" type="item-text-wrap" href="#/item/{{foundItem.id}}">
-          {{foundItem.element_texts[0].text}}
+        <ion-item ng-repeat="item in foundItems" type="item-text-wrap" href="#/item/{{item.id}}">
+          {{item.element_texts[0].text}}
         </ion-item>
     </ion-list>
   </div>

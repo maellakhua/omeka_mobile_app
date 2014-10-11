@@ -79,25 +79,21 @@ angular.module('starter.controllers', [])
                 var jsonsearcharray = [];
                 $scope.length=response.length;
                 //var name=$scope.item_name;
-                var y=$scope.item_name;
-                                console.log(y);
-
+                var y=$scope.item_name.toLowerCase();
+                
+//delete from omeka empty items!! SOS
                 for (var i=0; i<response.length; i++){
-                    var x=response[i].element_texts[0].text;
-                    //console.log(x);
-
-                    if(x==y){
-
-                    jsonsearcharray.push(response[i]);
-                        
+                    var x=response[i].element_texts[0].text.toLowerCase();
+                    if(x.indexOf(y)>-1){
+                        //console.log(response[i].element_texts[0].text);
+                        jsonsearcharray.push(response[i]);
+                        //console.log(jsonsearcharray);
+                    //break;
                     }
-                    
                 }
-                 
+                
                 $scope.foundItems = angular.fromJson(jsonsearcharray);
                 
-                
-                //$scope.collections = response;
             }).error(function(error){
                 $scope.error = error;
             });
