@@ -1,5 +1,16 @@
 <ion-view title="Dashboard">
   <ion-content class="padding">
-    <h1>Dash</h1>
+    
+      <div ng-app="siteUrl" ng-controller="siteUrlCtrl" >
+      
+          <input type="text" placeholder="Enter Omeka url" ng-model="siteUrl">
+          <button ng-click="assignUrl(siteUrl)"/>
+          
+      </br>      
+      <ion-list>
+        
+    </ion-list>
+  </div>
+      
   </ion-content>
 </ion-view>

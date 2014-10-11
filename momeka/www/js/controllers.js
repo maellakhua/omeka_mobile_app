@@ -14,10 +14,21 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope) {
 })
 
-.controller('CollectionsCtrl', function($scope,$http) {
+.controller('siteUrlCtrl', function($scope,Url,$http) {
+    $scope.assignUrl = function(url){
+        Url.setUrl(url);
+        alert(url);
+        
+    };
+        
+    
+    
+})
+
+.controller('CollectionsCtrl', function($scope,Url,$http) {
     
           $http({
-            url: "http://83.212.109.180/omeka/api/collections/",
+            url: Url.all()+"/api/collections/",
             dataType: "json",
             method: "GET",
             headers: {
@@ -30,70 +41,82 @@ angular.module('starter.controllers', [])
             });
 })
 
-.controller('CollectionDetailCtrl', function($scope,$stateParams,$http) {
-    
-          $http({
-            url: "http://83.212.109.180/omeka/api/collections/"+$stateParams.collectionId,
+.controller('CollectionDetailCtrl', function ($scope, Url, $stateParams, $http) {
+
+    $http({
+        url: Url.all() + "/api/collections/" + $stateParams.collectionId,
+        dataType: "json",
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).success(function (response) {
+
+        $scope.items_in_collection = response.items.count;
+        $scope.collection_name = response.element_texts[0].text;
+        $http({
+            url: response.items.url,
             dataType: "json",
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
-            }).success(function(response){
+        }).success(function (response) {
+
+
+            $scope.items = response;
+            for (var i = 0; i < response.length; i++) {
+
+                $scope.pic_url56 = response[i].files.url;
+                var jsonarraypic4 = [];
                 
-                $scope.items_in_collection=response.items.count;
-                $scope.collection_name = response.element_texts[0].text;
-                 $http({
-                    url: response.items.url,
+                console.log(angular.fromJson($scope.items));
+
+//$scope.pic_url
+                $http({
+                    url: $scope.pic_url56,
                     dataType: "json",
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
                     }
-                    }).success(function(response){
-                
+                }).success(function (response) {
+                    console.log(response[0].file_urls.square_thumbnail);
+                    $scope.items[i].thumbnail=response[0].file_urls.square_thumbnail;
+                    
+console.log(response[0].file_urls.square_thumbnail);
 
-                        $scope.items = response;
-                for (var i=0; i<response.length; i++){
+                console.log(angular.fromJson(response));
 
-//$scope.pic_url
-$http({
-            url: response[i].files.url,
-            dataType: "json",
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-            }).success(function(response){
-                var jsonarraypic4 = [];
-                
-                var jsonObj4=new Object;
+
+                    var jsonObj4 = new Object;
                     var x = response[0].file_urls.square_thumbnail;
-                    var y=response[0].item.id;
-                     jsonObj4[x]=y;
+                    var y = response[0].item.id;
+                    jsonObj4[x] = y;
                     jsonarraypic4.push(jsonObj4);
                     $scope.pic_thumbnail_url56 = angular.fromJson(jsonarraypic4);
-               
-            }).error(function(error){
-                $scope.error = error;
-            });
-                }
+                    console.log(jsonarraypic4);
 
-                    }).error(function(error){
-                        $scope.error = error;
-                    });
-                
-                
-                
-            }).error(function(error){
-                $scope.error = error;
-            });
+                }).error(function (error) {
+                    $scope.error = error;
+                });
+            }
+
+        }).error(function (error) {
+            $scope.error = error;
+        });
+
+
+
+    }).error(function (error) {
+        $scope.error = error;
+    });
 })
 
-.controller('SearchItemsCtrl', function($scope,$http) {
+.controller('SearchItemsCtrl', function($scope,Url,$http) {
     $scope.onchange = function(){
           $http({
-            url: "http://83.212.109.180/omeka/api/items/",
+            url: Url.all()+"/api/items/",
             dataType: "json",
             method: "GET",
             headers: {
@@ -126,11 +149,11 @@ $http({
 
 
 
-.controller('ItemDetailCtrl', function($scope,$stateParams,$http) {
+.controller('ItemDetailCtrl', function($scope,Url,$stateParams,$http) {
     
     
     $http({
-            url: "http://83.212.109.180/omeka/api/items/"+$stateParams.itemId,
+            url: Url.all()+"/api/items/"+$stateParams.itemId,
             dataType: "json",
             method: "GET",
             headers: {
@@ -209,11 +232,11 @@ $http({
 
 
 
-.controller('latestCtrl', function($scope,$stateParams,$http) {
+.controller('latestCtrl', function($scope,Url,$stateParams,$http) {
     
     
     $http({
-            url: "http://83.212.109.180/omeka/api/items/",
+            url: Url.all()+"/api/items/",
             dataType: "json",
             method: "GET",
             headers: {

@@ -9,12 +9,14 @@
   <ion-content has-header="true" padding="true">
       <ion-list>
         <ion-item ng-repeat="item in items" type="item-text-wrap" href="#/item/{{item.id}}">
-          <img  src="{{pic_thumbnail_url56[0].key}}">{{item.element_texts[0].text}}
+          
+            <img  src="{{key}}">{{item.element_texts[0].text}}
+        
         </ion-item>
     </ion-list>
-      <ul ng-repeat="pic in pic_thumbnail_url56">
-            <li ng-repeat="(key, val) in pic"><img src="{{key}}"></li>
-        </ul>
+      <!--<ul ng-repeat="pic in pic_thumbnail_url56">
+            <li ng-repeat="(key, val) in pic"><a href="#/item/{{val}}"><img src="{{key}}"></a></li>
+        </ul>-->
   </ion-content>
 </ion-view>
 
