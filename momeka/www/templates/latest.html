@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<ion-view title="latest">
+  <ion-content has-header="true" padding="true">
+     <!-- <ul>
+          <li ng-repeat="pic in latest_pics"><a href="#/item/{{item.id}}"><img src="{{pic}}"></a></li>
+        </ul>
+        -->
+      <ul ng-repeat="pic in latest_pics">
+            <li ng-repeat="(key, val) in pic"><a href="#/item/{{val}}"><img src="{{key}}"></a></li>
+        </ul>
+     
+     
+  </ion-content>
+</ion-view>

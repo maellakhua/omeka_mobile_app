@@ -117,9 +117,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'ItemDetailCtrl'
         }
       }
-    });
+    })
     
-
+    .state('tab.latest', {
+      url: '/latest',
+      views: {
+        'tab-collections': {
+          templateUrl: 'templates/latest.html',
+          controller: 'latestCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('dash');

@@ -51,8 +51,33 @@ angular.module('starter.controllers', [])
                         "Content-Type": "application/json"
                     }
                     }).success(function(response){
+                
 
                         $scope.items = response;
+                for (var i=0; i<response.length; i++){
+
+//$scope.pic_url
+$http({
+            url: response[i].files.url,
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                var jsonarraypic4 = [];
+                
+                var jsonObj4=new Object;
+                    var x = response[0].file_urls.square_thumbnail;
+                    var y=response[0].item.id;
+                     jsonObj4[x]=y;
+                    jsonarraypic4.push(jsonObj4);
+                    $scope.pic_thumbnail_url56 = angular.fromJson(jsonarraypic4);
+               
+            }).error(function(error){
+                $scope.error = error;
+            });
+                }
 
                     }).error(function(error){
                         $scope.error = error;
@@ -81,7 +106,6 @@ angular.module('starter.controllers', [])
                 //var name=$scope.item_name;
                 var y=$scope.item_name.toLowerCase();
                 
-//delete from omeka empty items!! SOS
                 for (var i=0; i<response.length; i++){
                     var x=response[i].element_texts[0].text.toLowerCase();
                     if(x.indexOf(y)>-1){
@@ -124,7 +148,20 @@ angular.module('starter.controllers', [])
                     jsonarray.push(jsonObj);
                 }
                  
+                 var jsonarraytags = [];
+                $scope.length=response.tags.length;
+                for (var i=0; i<response.tags.length; i++){
+                    var jsonObj=new Object;
+                    var x = response.tags[i].name;
+                    var y=response.tags[i].resource;
+                     jsonObj[y]=x;
+                    jsonarraytags.push(jsonObj);
+                }
+                 
                 $scope.items = angular.fromJson(jsonarray);
+                
+                $scope.tags = angular.fromJson(jsonarraytags);
+
                 $scope.item_title = response.element_texts[0].text;
 
                 $scope.pic_url=response.files.url;
@@ -141,17 +178,17 @@ $http({
             }
             }).success(function(response){
                 
-                var jsonarraypic = [];
+                var jsonarraypic2 = [];
                 $scope.lengthpic=response.length;
                 for (var i=0; i<response.length; i++){
                     var jsonObj2=new Object;
                     var x = response[i].file_urls.square_thumbnail;
                     var y=response[i].file_urls.original;
                      jsonObj2[x]=y;
-                    jsonarraypic.push(jsonObj2);
+                    jsonarraypic2.push(jsonObj2);
                 }
                  
-                $scope.pics = angular.fromJson(jsonarraypic);
+                $scope.pics = angular.fromJson(jsonarraypic2);
                 
                 
                 
@@ -165,6 +202,52 @@ $http({
                 
                 
                 
+            }).error(function(error){
+                $scope.error = error;
+            });
+})
+
+
+
+.controller('latestCtrl', function($scope,$stateParams,$http) {
+    
+    
+    $http({
+            url: "http://83.212.109.180/omeka/api/items/",
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                
+                $scope.length2=response.length;
+                
+                for(var i=$scope.length2-1;i>$scope.length2-5;i--){
+                    $scope.latest_pic_url=response[i].files.url;
+                                     var jsonarraypic3 = [];
+
+                     
+                     $http({
+            url: $scope.latest_pic_url,
+            dataType: "json",
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            }).success(function(response){
+                    var jsonObj3=new Object;
+                    var x = response[0].file_urls.square_thumbnail;
+                    var y=response[0].item.id;
+                     jsonObj3[x]=y;
+                    jsonarraypic3.push(jsonObj3);
+                    $scope.latest_pics = angular.fromJson(jsonarraypic3);
+
+            }).error(function(error){
+                $scope.error = error;
+            });  
+                }
+               
             }).error(function(error){
                 $scope.error = error;
             });
