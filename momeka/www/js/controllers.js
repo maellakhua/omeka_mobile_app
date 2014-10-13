@@ -66,12 +66,10 @@ angular.module('starter.controllers', [])
 
             $scope.items = response;
             for (var i = 0; i < response.length; i++) {
-
                 $scope.pic_url56 = response[i].files.url;
                 var jsonarraypic4 = [];
-                
-                console.log(angular.fromJson($scope.items));
 
+                //console.log(angular.fromJson($scope.items));
 //$scope.pic_url
                 $http({
                     url: $scope.pic_url56,
@@ -81,21 +79,13 @@ angular.module('starter.controllers', [])
                         "Content-Type": "application/json"
                     }
                 }).success(function (response) {
-                    console.log(response[0].file_urls.square_thumbnail);
-                    $scope.items[i].thumbnail=response[0].file_urls.square_thumbnail;
                     
-console.log(response[0].file_urls.square_thumbnail);
-
-                console.log(angular.fromJson(response));
-
-
                     var jsonObj4 = new Object;
                     var x = response[0].file_urls.square_thumbnail;
                     var y = response[0].item.id;
                     jsonObj4[x] = y;
                     jsonarraypic4.push(jsonObj4);
                     $scope.pic_thumbnail_url56 = angular.fromJson(jsonarraypic4);
-                    console.log(jsonarraypic4);
 
                 }).error(function (error) {
                     $scope.error = error;
@@ -189,7 +179,7 @@ console.log(response[0].file_urls.square_thumbnail);
 
                 $scope.pic_url=response.files.url;
                 
-                console.log($scope.pic_url);
+                //console.log($scope.pic_url);
 
 //$scope.pic_url
 $http({
