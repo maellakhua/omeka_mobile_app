@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
                         "Content-Type": "application/json"
                     }
                 }).success(function (response) {
-                    ds
+                    
                     var jsonObj4 = new Object;
                     var x = response[0].file_urls.square_thumbnail;
                     var y = response[0].item.id;
